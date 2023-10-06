@@ -53,7 +53,17 @@ class RakController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Rak::find($id);
+        
+        if(!$data) return response()->json([
+            "message" => "Tidak Menemukan Rak"
+        ],400);
+        
+        return response()->json([
+            "message" => "Berhasil Menemukan Rak",
+            "data" => $data
+        ],200);
+        
     }
 
     /**
@@ -67,9 +77,9 @@ class RakController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        $data = Rak::findOrFail($request->id);
+        $data = Rak::find($id);
         $updatedData = $data->update([
             "nama_rak" => $request->nama_rak,
             "lokasi_rak" => $request->lokasi_rak,

@@ -55,9 +55,18 @@ class PetugasController extends Controller
          */
         public function show(string $id)
         {
-            //
+            $data = Petugas::find($id);
+            
+            if(!$data) return response()->json([
+                "message" => "Tidak Menemukan Petugas"
+            ],400);
+            
+            return response()->json([
+                "message" => "Berhasil Menemukan Petugas",
+                "data" => $data
+            ],200);
+            
         }
-    
         /**
          * Show the form for editing the specified resource.
          */
@@ -69,9 +78,9 @@ class PetugasController extends Controller
         /**
          * Update the specified resource in storage.
          */
-        public function update(Request $request)
+        public function update(Request $request, string $id)
         {
-            $data = Petugas::findOrFail($request->id);
+            $data = Petugas::find($id);
             $updatedData = $data->update([
                 "nama_petugas" => $request->nama_petugas,
                 "jabatan_petugas" => $request->jabatan_petugas,

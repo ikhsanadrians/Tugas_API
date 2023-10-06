@@ -55,9 +55,18 @@ class AnggotaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data =  Anggota::find($id);
+        
+        if(!$data) return response()->json([
+            "message" => "Tidak Menemukan Anggota"
+        ],400);
+        
+        return response()->json([
+            "message" => "Berhasil Menemukan Anggota",
+            "data" => $data
+        ],200);
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -69,15 +78,15 @@ class AnggotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        $data = Anggota::findOrFail($request->id);
+        $data = Anggota::find($id);
         $updatedData = $data->update([
-          "kode_buku" => $request->kode_buku,
-          "judul_buku" => $request->judul_buku,
-          "penulis_buku" => $request->penulis_buku,
-          "penerbit_buku" => $request->penerbit_buku,
-          "tahun_penerbit" => $request->tahun_penerbit,
+          "kode_anggota" => $request->kode_anggota,
+          "nama_anggota" => $request->nama_anggota,
+          "jk_anggota" => $request->jk_anggota,
+          "jurusan_anggota" => $request->jurusan_anggota,
+          "no_telp_anggota" => $request->no_telp_anggota,
           "alamat_anggota" => $request->alamat_anggota
         ]);
 

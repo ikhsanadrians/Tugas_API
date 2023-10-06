@@ -53,7 +53,17 @@ class PengembalianController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Pengembalian::find($id);
+        
+        if(!$data) return response()->json([
+            "message" => "Tidak Menemukan Buku"
+        ],400);
+        
+        return response()->json([
+            "message" => "Berhasil Menemukan Buku",
+            "data" => $data
+        ],200);
+        
     }
 
     /**
@@ -67,9 +77,9 @@ class PengembalianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request,string $id)
     {
-        $data = Pengembalian::findOrFail($request->id);
+        $data = Pengembalian::find($id);
         $updatedData = $data->update([
             "tanggal_pengembalian" => $request->tanggal_pengembalian,
             "denda" => $request->denda,

@@ -55,9 +55,18 @@ class PeminjamanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Peminjaman::find($id);
+        
+        if(!$data) return response()->json([
+            "message" => "Tidak Menemukan Peminjaman"
+        ],400);
+        
+        return response()->json([
+            "message" => "Berhasil Menemukan Peminjaman",
+            "data" => $data
+        ],200);
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -69,9 +78,9 @@ class PeminjamanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        $data = Peminjaman::findOrFail($request->id);
+        $data = Peminjaman::find($id);
         $updatedData = $data->update([
             "tanggal_pinjam" => $request->tanggal_pinjam,
             "tanggal_kembali" => $request->tanggal_kembali,

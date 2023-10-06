@@ -58,7 +58,17 @@ class BukuController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Buku::find($id);
+        
+        if(!$data) return response()->json([
+            "message" => "Tidak Menemukan Buku"
+        ],400);
+        
+        return response()->json([
+            "message" => "Berhasil Menemukan Buku",
+            "data" => $data
+        ],200);
+
     }
 
     /**
@@ -72,9 +82,9 @@ class BukuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        $data = Buku::findOrFail($request->id);
+        $data = Buku::find($id);
         $updatedData = $data->update([
           "kode_buku" => $request->kode_buku,
           "judul_buku" => $request->judul_buku,
@@ -94,7 +104,7 @@ class BukuController extends Controller
         ],200);
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)

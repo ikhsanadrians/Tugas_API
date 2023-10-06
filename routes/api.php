@@ -26,44 +26,50 @@ use App\Http\Controllers\RakController;
 
 Route::prefix('/buku')->group(function(){
     Route::get('/',[BukuController::class,'index']);
+    Route::get('/{id}',[BukuController::class,'show']);
     Route::post('/create',[BukuController::class,'create']);
-    Route::put('/update',[BukuController::class,'update']);
+    Route::put('{id}/update',[BukuController::class,'update']);
     Route::delete('{id}/delete',[BukuController::class,'destroy']);
 });
 
 Route::prefix('/anggota')->group(function(){
     Route::get('/',[AnggotaController::class,'index']);
+    Route::get('/{id}',[AnggotaController::class,'show']);
     Route::post('/create',[AnggotaController::class,'create']);
-    Route::put('/update',[AnggotaController::class,'update']);
+    Route::put('{id}/update',[AnggotaController::class,'update']);
     Route::delete('{id}/delete',[AnggotaController::class,'destroy']);
 });
 
 Route::prefix('/petugas')->group(function(){
     Route::get('/',[PetugasController::class,'index']);
+    Route::get('/{id}',[PetugasController::class,'show']);
     Route::post('/create',[PetugasController::class,'create']);
-    Route::put('/update',[PetugasController::class,'update']);
+    Route::put('{id}/update',[PetugasController::class,'update']);
     Route::delete('{id}/delete',[PetugasController::class,'destroy']);
 });
 
 Route::prefix('/rak')->group(function(){
     Route::get('/',[RakController::class,'index']);
+    Route::get('/{id}',[RakController::class,'show']);
     Route::post('/create',[RakController::class,'create']);
-    Route::put('/update',[RakController::class,'update']);
+    Route::put('{id}/update',[RakController::class,'update']);
     Route::delete('{id}/delete',[RakController::class,'destroy']);
 });
 
 Route::prefix('/peminjaman')->group(function(){
     Route::get('/',[PeminjamanController::class,'index']);
+    Route::get('/{id}',[PeminjamanController::class,'show']);
     Route::post('/create',[PeminjamanController::class,'create']);
-    Route::put('/update',[PeminjamanController::class,'update']);
+    Route::put('{id}/update',[PeminjamanController::class,'update']);
     Route::delete('{id}/delete',[PeminjamanController::class,'destroy']);
 });
 
 
 Route::prefix('/pengembalian')->group(function(){
     Route::get('/',[PengembalianController::class,'index']);
+    Route::get('/{id}',[PengembalianController::class,'show']);
     Route::post('/create',[PengembalianController::class,'create']);
-    Route::put('/update',[PengembalianController::class,'update']);
+    Route::put('{id}/update',[PengembalianController::class,'update']);
     Route::delete('{id}/delete',[PengembalianController::class,'destroy']);
 });
 
